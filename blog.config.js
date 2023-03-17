@@ -2,7 +2,7 @@ const BLOG = {
   title: 'Weekend',
   author: 'SunnyRx',
   email: 'admin@sunnyrx.com',
-  link: 'https://nobelium-sunnyrx.vercel.app/',
+  link: 'https://sunnyrx.com/',
   description: 'Weekend. We can.',
   lang: 'en-US', // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   appearance: 'auto', // ['light', 'dark', 'auto'],
