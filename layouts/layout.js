@@ -6,6 +6,7 @@ import { NotionRenderer } from 'react-notion-x'
 import BLOG from '@/blog.config'
 import formatDate from '@/lib/formatDate'
 import { useLocale } from '@/lib/locale'
+import useTheme from '@/lib/theme'
 import { useRouter } from 'next/router'
 import Comments from '@/components/Comments'
 
@@ -66,6 +67,12 @@ const Pdf = dynamic(
     ssr: false
   }
 )
+const Tweet = dynamic(() =>
+  import('react-tweet-embed').then(({ default: TweetEmbed }) => {
+    const Tweet = ({ id }) => <TweetEmbed tweetId={id} options={{ theme: 'dark' }} />
+    return Tweet
+  })
+)
 
 const mapPageUrl = id => {
   return 'https://www.notion.so/' + id.replace(/-/g, '')
@@ -80,6 +87,8 @@ const Layout = ({
 }) => {
   const locale = useLocale()
   const router = useRouter()
+  const { dark } = useTheme()
+
   return (
     <Container
       layout="blog"
@@ -133,14 +142,16 @@ const Layout = ({
                 Code,
                 Collection,
                 Equation,
-                Pdf
+                Pdf,
+                Tweet
               }}
               mapPageUrl={mapPageUrl}
+              darkMode={dark}
             />
           </div>
         )}
       </article>
-      <div className="flex justify-between font-medium text-gray-500 dark:text-gray-400">
+      <div className="flex justify-between font-medium text-gray-500 dark:text-gray-400 my-5">
         <a>
           <button
             onClick={() => router.push(BLOG.path || '/')}
