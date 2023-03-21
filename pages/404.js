@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
-import Container from '@/components/Container';
+import { useEffect } from 'react'
+import { useLocale } from '@/lib/locale'
+import Container from '@/components/Container'
 
-export default function Custom404 () {
-  const isBrowser = typeof window !== 'undefined';
+export default function Page404 () {
+  const isBrowser = typeof window !== 'undefined'
+  const locale = useLocale()
 
   useEffect(() => {
     if (isBrowser) {
@@ -17,15 +19,13 @@ export default function Custom404 () {
         window.location.replace(newUrl);
       }
     }
-  }, [isBrowser]);
+  }, [isBrowser])
 
-  if (!isBrowser) {
-    return (
-      <Container>
-        <p style={{ textAlign: 'center', fontSize: '3em' }}>404 Not Found</p>
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <h1 className="text-5xl text-black dark:text-white text-center">404</h1>
+      <p className="text-xl text-gray-600 dark:text-gray-300 text-center">{locale.PAGE.ERROR_404.MESSAGE}</p>
+    </Container>
+  )
 
-  return null;
 }
